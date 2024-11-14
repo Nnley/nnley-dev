@@ -2,14 +2,17 @@
 
 import { SocialNetworksDock } from '@/components/shared'
 import { LoadingPage } from '@/components/shared/loading-page'
+import { MeetingBlock } from '@/components/shared/meeting-block'
 import { videoQualities } from '@/config/video.config'
 import { useAnimatedTitle, useConnectionSpeed } from '@/hooks'
 import React from 'react'
 
+// TODO: Create module files for all styles
 export default function Home() {
 	useAnimatedTitle()
 
 	const [isPlaying, setIsPlaying] = React.useState(true)
+	const [soundMuted, setSoundMuted] = React.useState(false)
 	const [videoSrc, setVideoSrc] = React.useState('/videos/Von-dutch-480p.webm')
 	const [isLoadingPage, setIsLoadingPage] = React.useState(true)
 	const [loadingVideo, setLoadingVideo] = React.useState(true)
@@ -17,6 +20,7 @@ export default function Home() {
 
 	const speed = useConnectionSpeed()
 
+	// TODO: Split the code refactor into files (optimize)
 	React.useEffect(() => {
 		if (speed > 8000) {
 			setVideoSrc(videoQualities['1080p'])
@@ -53,6 +57,18 @@ export default function Home() {
 		}
 	}
 
+	const handleToggleSound = () => {
+		if (videoRef.current) {
+			if (soundMuted) {
+				videoRef.current.muted = false
+			} else {
+				videoRef.current.muted = true
+			}
+			setSoundMuted(!soundMuted)
+		}
+	}
+
+	// TODO: Add a video download loading to the loading page
 	if (isLoadingPage) {
 		return <LoadingPage setIsLoadingPage={setIsLoadingPage} isLoadedVideo={!loadingVideo} />
 	}
@@ -71,8 +87,16 @@ export default function Home() {
 					<source src={videoSrc} type='video/webm' />
 				</video>
 			)}
+
+			<MeetingBlock />
+
 			<div className='fixed bottom-0 w-full text-center p-4 pb-14'>
-				<SocialNetworksDock handlePlayPause={handlePlayPause} playingVideo={isPlaying} />
+				<SocialNetworksDock
+					handleToggleSound={handleToggleSound}
+					handlePlayPause={handlePlayPause}
+					playingVideo={isPlaying}
+					soundMuted={soundMuted}
+				/>
 			</div>
 		</main>
 	)

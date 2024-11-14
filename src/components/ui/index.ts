@@ -1,4 +1,5 @@
 export * from './button'
 export * from './dock'
+export { Meteors } from './meteors'
 export { Separator } from './separator'
 export * from './tooltip'

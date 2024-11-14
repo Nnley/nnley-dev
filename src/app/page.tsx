@@ -2,8 +2,8 @@
 
 import { SocialNetworksDock } from '@/components/shared'
 import { LoadingPage } from '@/components/shared/loading-page'
-import { useAnimatedTitle } from '@/hooks/use-animated-title'
-import { testSpeed } from '@/lib'
+import { videoQualities } from '@/config/video.config'
+import { useAnimatedTitle, useConnectionSpeed } from '@/hooks'
 import React from 'react'
 
 export default function Home() {
@@ -14,6 +14,22 @@ export default function Home() {
 	const [isLoadingPage, setIsLoadingPage] = React.useState(true)
 	const [loadingVideo, setLoadingVideo] = React.useState(true)
 	const videoRef = React.useRef<HTMLVideoElement | null>(null)
+
+	const speed = useConnectionSpeed()
+
+	React.useEffect(() => {
+		if (speed > 8000) {
+			setVideoSrc(videoQualities['1080p'])
+		} else if (speed > 3000) {
+			setVideoSrc(videoQualities['720p'])
+		} else if (speed > 1000) {
+			setVideoSrc(videoQualities['480p'])
+		} else {
+			setVideoSrc('')
+		}
+
+		setLoadingVideo(false)
+	}, [speed])
 
 	React.useEffect(() => {
 		const enableSound = () => {
@@ -36,8 +52,6 @@ export default function Home() {
 			setIsPlaying(!isPlaying)
 		}
 	}
-
-	testSpeed({ setVideoSrc, setLoadingVideo })
 
 	if (isLoadingPage) {
 		return <LoadingPage setIsLoadingPage={setIsLoadingPage} isLoadedVideo={!loadingVideo} />

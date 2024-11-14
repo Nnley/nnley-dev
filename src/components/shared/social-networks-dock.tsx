@@ -70,7 +70,7 @@ export const SocialNetworksDock: React.FC<Props> = ({
 				<DockIcon>
 					<Tooltip>
 						<TooltipTrigger asChild>
-							// TODO: Add volume change
+							{/* TODO: Add volume change */}
 							<Button variant='ghost' size='icon' className='size-12 rounded-full' onClick={handleToggleSound}>
 								{soundMuted ? (
 									<VolumeOff className='size-4 text-white dark:text-white/85' />

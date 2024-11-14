@@ -9,36 +9,22 @@ import React from 'react'
 export default function Home() {
 	useAnimatedTitle()
 
-	const [mounted, setMounted] = React.useState(false)
 	const [isPlaying, setIsPlaying] = React.useState(true)
 	const [videoSrc, setVideoSrc] = React.useState('/videos/Von-dutch-480p.webm')
 	const [isLoadingPage, setIsLoadingPage] = React.useState(true)
 	const [loadingVideo, setLoadingVideo] = React.useState(true)
 	const videoRef = React.useRef<HTMLVideoElement | null>(null)
 
-	const enableSound = () => {
-		if (videoRef.current) {
-			videoRef.current.muted = false
-			videoRef.current.volume = 0.1
+	React.useEffect(() => {
+		const enableSound = () => {
+			if (videoRef.current) {
+				videoRef.current.muted = false
+				videoRef.current.volume = 0.1
+			}
 		}
 
-		document.removeEventListener('click', enableSound)
-		document.removeEventListener('keydown', enableSound)
-	}
-
-	React.useEffect(() => {
-		setMounted(true)
-	})
-
-	React.useEffect(() => {
-		document.addEventListener('click', enableSound)
-		document.addEventListener('keydown', enableSound)
-
-		return () => {
-			document.removeEventListener('click', enableSound)
-			document.removeEventListener('keydown', enableSound)
-		}
-	}, [])
+		enableSound()
+	}, [isLoadingPage])
 
 	const handlePlayPause = () => {
 		if (videoRef.current) {

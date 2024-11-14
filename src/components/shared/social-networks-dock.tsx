@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { HomeIcon, MailIcon, Pause, Play } from 'lucide-react'
+import { MailIcon, Pause, Play, Volume2Icon, VolumeOff } from 'lucide-react'
 import Link from 'next/link'
 import React, { SVGProps } from 'react'
 import {
@@ -19,7 +19,9 @@ import { TelegramIcon } from './telegram-icon'
 
 interface Props {
 	handlePlayPause: () => void
+	handleToggleSound: () => void
 	playingVideo: boolean
+	soundMuted: boolean
 	className?: string
 }
 
@@ -34,7 +36,6 @@ export const Icons = {
 }
 
 const DATA = {
-	navbar: [{ href: '#', icon: HomeIcon, label: 'Home' }],
 	contact: {
 		social: {
 			GitHub: {
@@ -56,29 +57,33 @@ const DATA = {
 	},
 }
 
-export const SocialNetworksDock: React.FC<Props> = ({ handlePlayPause, playingVideo, className }) => {
+export const SocialNetworksDock: React.FC<Props> = ({
+	handlePlayPause,
+	handleToggleSound,
+	playingVideo,
+	soundMuted,
+	className,
+}) => {
 	return (
 		<TooltipProvider>
 			<Dock direction='middle' className={className}>
-				{DATA.navbar.map(item => (
-					<DockIcon key={item.label}>
-						<Tooltip>
-							<TooltipTrigger asChild>
-								<Link
-									href={item.href}
-									target='_blank'
-									aria-label={item.label}
-									className={cn(buttonVariants({ variant: 'ghost', size: 'icon' }), 'size-12 rounded-full')}
-								>
-									<item.icon color='white' className='size-4 text-white dark:text-white/85' />
-								</Link>
-							</TooltipTrigger>
-							<TooltipContent>
-								<p>{item.label}</p>
-							</TooltipContent>
-						</Tooltip>
-					</DockIcon>
-				))}
+				<DockIcon>
+					<Tooltip>
+						<TooltipTrigger asChild>
+							// TODO: Add volume change
+							<Button variant='ghost' size='icon' className='size-12 rounded-full' onClick={handleToggleSound}>
+								{soundMuted ? (
+									<VolumeOff className='size-4 text-white dark:text-white/85' />
+								) : (
+									<Volume2Icon className='size-4 text-white dark:text-white/85' />
+								)}
+							</Button>
+						</TooltipTrigger>
+						<TooltipContent>
+							<p>{soundMuted ? 'Unmute' : 'Mute'}</p>
+						</TooltipContent>
+					</Tooltip>
+				</DockIcon>
 				<DockIcon>
 					<Tooltip>
 						<TooltipTrigger asChild>

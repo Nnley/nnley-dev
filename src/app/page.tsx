@@ -1,7 +1,9 @@
 'use client'
 
 import { SocialNetworksDock } from '@/components/shared'
+import { LoadingPage } from '@/components/shared/loading-page'
 import { useAnimatedTitle } from '@/hooks/use-animated-title'
+import { testSpeed } from '@/lib'
 import React from 'react'
 
 export default function Home() {
@@ -9,6 +11,9 @@ export default function Home() {
 
 	const [mounted, setMounted] = React.useState(false)
 	const [isPlaying, setIsPlaying] = React.useState(true)
+	const [videoSrc, setVideoSrc] = React.useState('/videos/Von-dutch-480p.webm')
+	const [isLoadingPage, setIsLoadingPage] = React.useState(true)
+	const [loadingVideo, setLoadingVideo] = React.useState(true)
 	const videoRef = React.useRef<HTMLVideoElement | null>(null)
 
 	const enableSound = () => {
@@ -22,6 +27,10 @@ export default function Home() {
 	}
 
 	React.useEffect(() => {
+		setMounted(true)
+	})
+
+	React.useEffect(() => {
 		document.addEventListener('click', enableSound)
 		document.addEventListener('keydown', enableSound)
 
@@ -29,10 +38,6 @@ export default function Home() {
 			document.removeEventListener('click', enableSound)
 			document.removeEventListener('keydown', enableSound)
 		}
-	}, [])
-
-	React.useEffect(() => {
-		setMounted(true)
 	}, [])
 
 	const handlePlayPause = () => {
@@ -46,22 +51,26 @@ export default function Home() {
 		}
 	}
 
-	if (!mounted) {
-		return null
+	testSpeed({ setVideoSrc, setLoadingVideo })
+
+	if (isLoadingPage) {
+		return <LoadingPage setIsLoadingPage={setIsLoadingPage} isLoadedVideo={!loadingVideo} />
 	}
 
 	return (
 		<main className='flex items-center justify-center bg-black'>
-			<video
-				ref={videoRef}
-				autoPlay
-				muted
-				loop
-				playsInline
-				className='w-screen h-screen object-cover overflow-hidden opacity-20'
-			>
-				<source src='/videos/Von-dutch-1080p.webm' type='video/webm' />
-			</video>
+			{videoSrc && (
+				<video
+					ref={videoRef}
+					autoPlay
+					muted
+					loop
+					playsInline
+					className='w-screen h-screen object-cover overflow-hidden opacity-20'
+				>
+					<source src={videoSrc} type='video/webm' />
+				</video>
+			)}
 			<div className='fixed bottom-0 w-full text-center p-4 pb-14'>
 				<SocialNetworksDock handlePlayPause={handlePlayPause} playingVideo={isPlaying} />
 			</div>

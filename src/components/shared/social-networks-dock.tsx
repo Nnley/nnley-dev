@@ -28,7 +28,7 @@ export type IconProps = SVGProps<SVGSVGElement> & {
 }
 
 export const Icons = {
-	email: (props: IconProps) => <MailIcon color='white' {...props} />,
+	email: (props: IconProps) => <MailIcon {...props} />,
 	github: (props: IconProps) => <GitHubIcon {...props} />,
 	telegram: (props: IconProps) => <TelegramIcon {...props} />,
 }
@@ -70,7 +70,7 @@ export const SocialNetworksDock: React.FC<Props> = ({ handlePlayPause, playingVi
 									aria-label={item.label}
 									className={cn(buttonVariants({ variant: 'ghost', size: 'icon' }), 'size-12 rounded-full')}
 								>
-									<item.icon color='white' className='size-4' />
+									<item.icon color='white' className='size-4 text-white dark:text-white/85' />
 								</Link>
 							</TooltipTrigger>
 							<TooltipContent>
@@ -83,7 +83,11 @@ export const SocialNetworksDock: React.FC<Props> = ({ handlePlayPause, playingVi
 					<Tooltip>
 						<TooltipTrigger asChild>
 							<Button variant='ghost' size='icon' className='size-12 rounded-full' onClick={handlePlayPause}>
-								{playingVideo ? <Pause color='white' /> : <Play color='white' />}
+								{playingVideo ? (
+									<Pause className='size-4 text-white dark:text-white/85' />
+								) : (
+									<Play className='size-4 text-white dark:text-white/85' />
+								)}
 							</Button>
 						</TooltipTrigger>
 						<TooltipContent>
@@ -102,7 +106,7 @@ export const SocialNetworksDock: React.FC<Props> = ({ handlePlayPause, playingVi
 									aria-label={social.name}
 									className={cn(buttonVariants({ variant: 'ghost', size: 'icon' }), 'size-12 rounded-full')}
 								>
-									<social.icon className='size-4' />
+									<social.icon className='size-4 text-white dark:text-white/85' />
 								</Link>
 							</TooltipTrigger>
 							<TooltipContent>

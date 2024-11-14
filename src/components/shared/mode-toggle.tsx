@@ -24,7 +24,11 @@ export const ThemeToggle: React.FC<{ className?: string }> = ({ className }) => 
 			size='icon'
 			onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
 		>
-			{resolvedTheme === 'dark' ? <Sun className='size-4' /> : <Moon color='white' className='size-4' />}
+			{resolvedTheme === 'dark' ? (
+				<Sun className='size-4 text-white dark:text-white/85' />
+			) : (
+				<Moon className='size-4 text-white dark:text-white/85' />
+			)}
 		</Button>
 	)
 }

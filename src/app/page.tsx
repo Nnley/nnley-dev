@@ -51,23 +51,20 @@ export default function Home() {
 	}
 
 	return (
-		<>
-			<main className='flex items-center justify-center bg-black'>
-				<video
-					ref={videoRef}
-					autoPlay
-					muted
-					loop
-					playsInline
-					className='w-screen h-screen object-cover overflow-hidden opacity-20'
-				>
-					<source src='/videos/Von-dutch-1080p.webm' type='video/webm' />
-				</video>
-			</main>
-			<footer className='fixed bottom-0 w-full text-center p-4'>
+		<main className='flex items-center justify-center bg-black'>
+			<video
+				ref={videoRef}
+				autoPlay
+				muted
+				loop
+				playsInline
+				className='w-screen h-screen object-cover overflow-hidden opacity-20'
+			>
+				<source src='/videos/Von-dutch-1080p.webm' type='video/webm' />
+			</video>
+			<div className='fixed bottom-0 w-full text-center p-4 pb-14'>
 				<SocialNetworksDock handlePlayPause={handlePlayPause} playingVideo={isPlaying} />
-				<p className='text-gray-400 dark:text-gray-500 mt-4'>© {new Date().getFullYear()} Nnley</p>
-			</footer>
-		</>
+			</div>
+		</main>
 	)
 }

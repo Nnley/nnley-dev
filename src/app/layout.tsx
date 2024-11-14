@@ -29,6 +29,9 @@ export default function RootLayout({
 				<Providers attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
 					{children}
 				</Providers>
+				<footer className='fixed bottom-0 w-full text-center p-4'>
+					<p className='text-zinc-500 dark:text-zinc-600 mt-4'>© {new Date().getFullYear()} Nnley</p>
+				</footer>
 			</body>
 		</html>
 	)

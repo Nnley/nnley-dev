@@ -1,8 +1,9 @@
 import { cn } from '@/lib/utils'
-import { HomeIcon, MailIcon } from 'lucide-react'
+import { HomeIcon, MailIcon, Pause, Play } from 'lucide-react'
 import Link from 'next/link'
 import React, { SVGProps } from 'react'
 import {
+	Button,
 	buttonVariants,
 	Dock,
 	DockIcon,
@@ -17,6 +18,8 @@ import { ThemeToggle } from './mode-toggle'
 import { TelegramIcon } from './telegram-icon'
 
 interface Props {
+	handlePlayPause: () => void
+	playingVideo: boolean
 	className?: string
 }
 
@@ -25,7 +28,7 @@ export type IconProps = SVGProps<SVGSVGElement> & {
 }
 
 export const Icons = {
-	email: (props: IconProps) => <MailIcon {...props} />,
+	email: (props: IconProps) => <MailIcon color='white' {...props} />,
 	github: (props: IconProps) => <GitHubIcon {...props} />,
 	telegram: (props: IconProps) => <TelegramIcon {...props} />,
 }
@@ -53,7 +56,7 @@ const DATA = {
 	},
 }
 
-export const SocialNetworksDock: React.FC<Props> = ({ className }) => {
+export const SocialNetworksDock: React.FC<Props> = ({ handlePlayPause, playingVideo, className }) => {
 	return (
 		<TooltipProvider>
 			<Dock direction='middle' className={className}>
@@ -63,10 +66,11 @@ export const SocialNetworksDock: React.FC<Props> = ({ className }) => {
 							<TooltipTrigger asChild>
 								<Link
 									href={item.href}
+									target='_blank'
 									aria-label={item.label}
 									className={cn(buttonVariants({ variant: 'ghost', size: 'icon' }), 'size-12 rounded-full')}
 								>
-									<item.icon className='size-4' />
+									<item.icon color='white' className='size-4' />
 								</Link>
 							</TooltipTrigger>
 							<TooltipContent>
@@ -75,6 +79,18 @@ export const SocialNetworksDock: React.FC<Props> = ({ className }) => {
 						</Tooltip>
 					</DockIcon>
 				))}
+				<DockIcon>
+					<Tooltip>
+						<TooltipTrigger asChild>
+							<Button variant='ghost' size='icon' className='size-12 rounded-full' onClick={handlePlayPause}>
+								{playingVideo ? <Pause color='white' /> : <Play color='white' />}
+							</Button>
+						</TooltipTrigger>
+						<TooltipContent>
+							<p>{playingVideo ? 'Pause' : 'Play'}</p>
+						</TooltipContent>
+					</Tooltip>
+				</DockIcon>
 				<Separator orientation='vertical' className='h-full' />
 				{Object.entries(DATA.contact.social).map(([name, social]) => (
 					<DockIcon key={name}>
@@ -82,6 +98,7 @@ export const SocialNetworksDock: React.FC<Props> = ({ className }) => {
 							<TooltipTrigger asChild>
 								<Link
 									href={social.url}
+									target='_blank'
 									aria-label={social.name}
 									className={cn(buttonVariants({ variant: 'ghost', size: 'icon' }), 'size-12 rounded-full')}
 								>

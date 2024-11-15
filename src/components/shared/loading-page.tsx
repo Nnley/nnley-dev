@@ -54,14 +54,10 @@ export const LoadingPage: React.FC<Props> = ({ setIsLoadingPage }) => {
 
 	const handleProgress = () => {
 		if (videoRef.current) {
-			console.log(videoRef.current)
-
 			const buffered = videoRef.current.buffered
 
 			if (buffered.length > 0) {
 				const loaded = buffered.end(buffered.length - 1)
-
-				console.log(loaded)
 
 				if (loaded >= 5) {
 					setIsVideoContentLoaded(true)

@@ -31,13 +31,13 @@ export default function RootLayout({
 				<Providers attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
 					{children}
 				</Providers>
-				<footer className='flex fixed bottom-0 w-full text-center p-4 gap-4 justify-center items-center'>
-					<p className='text-zinc-500 dark:text-zinc-600 mt-4 opacity-60'>© {new Date().getFullYear()} Nnley</p>
-					<Separator orientation='vertical' className='h-[24px] mt-4 opacity-90' />
+				<footer className='flex fixed bottom-0 w-full text-center p-4 sm:gap-4 gap-3 justify-center items-center text-sm sm:text-base'>
+					<p className='text-zinc-500 dark:text-zinc-600 opacity-60'>© {new Date().getFullYear()} Nnley</p>
+					<Separator orientation='vertical' className='sm:h-[24px] h-[20px] opacity-90' />
 					<Link
 						href='https://youtu.be/cwZ1L_0QLjw?si=TMaue5aoI3xpj1m9'
 						target='_blank'
-						className='text-zinc-500 dark:text-zinc-600 mt-4 opacity-60 hover:opacity-100'
+						className='text-zinc-500 dark:text-zinc-600 opacity-60 hover:opacity-100'
 					>
 						Charli XCX - Von Dutch
 					</Link>

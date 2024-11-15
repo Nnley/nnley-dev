@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils'
+import { useDeviceInfoStore } from '@/store/device-info'
 import { MailIcon, Pause, Play, Volume2Icon, VolumeOff } from 'lucide-react'
 import Link from 'next/link'
 import React, { SVGProps } from 'react'
@@ -44,7 +45,7 @@ const DATA = {
 				icon: Icons.github,
 			},
 			email: {
-				name: 'Gmail',
+				name: 'Email',
 				url: 'mailto:business@nnley.dev',
 				icon: Icons.email,
 			},
@@ -64,9 +65,11 @@ export const SocialNetworksDock: React.FC<Props> = ({
 	soundMuted,
 	className,
 }) => {
+	const isMobile = useDeviceInfoStore(state => state.isMobile)
+
 	return (
 		<TooltipProvider>
-			<Dock direction='middle' className={className}>
+			<Dock direction='middle' className={className} distance={isMobile ? 0 : 120}>
 				<DockIcon>
 					<Tooltip>
 						<TooltipTrigger asChild>

@@ -24,7 +24,8 @@
     "react-use-please-stay": "^1.6.11",
     "shadcn": "^2.1.6",
     "tailwind-merge": "^2.5.4",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zustand": "^5.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",

@@ -39,11 +39,11 @@ export const LoadingPage: React.FC<Props> = ({ setIsLoadingPage }) => {
 	React.useEffect(() => {
 		if (!speed) return
 
-		if (speed > 6000) {
+		if (speed > 8000) {
 			setVideoSrc(videoQualities['1080p'])
-		} else if (speed > 2000) {
+		} else if (speed > 3000) {
 			setVideoSrc(videoQualities['720p'])
-		} else if (speed > 700) {
+		} else if (speed > 1000) {
 			setVideoSrc(videoQualities['480p'])
 		} else {
 			setVideoSrc('')

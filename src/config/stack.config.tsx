@@ -77,10 +77,10 @@ export const StackConfig: StackItem[] = [
 	{
 		icon: () => (
 			<svg
-				className='size-10'
+				className='size-full'
 				xmlns='http://www.w3.org/2000/svg'
-				width='2065'
-				height='2500'
+				width='29.5'
+				height='35.7'
 				style={{ transform: 'rotate(360deg)' }}
 				viewBox='0 -0.4499053178651202 258.5539889530368 310.4499053178651'
 			>

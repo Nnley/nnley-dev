@@ -4,6 +4,8 @@ import { SocialNetworksDock } from '@/components/shared'
 import { LoadingPage } from '@/components/shared/loading-page'
 import { MeetingBlock } from '@/components/shared/meeting-block'
 import { useAnimatedTitle } from '@/hooks'
+import { cn } from '@/lib'
+import { useDeviceInfoStore } from '@/store/device-info'
 import { useVideoSourceStore } from '@/store/video-source'
 import React from 'react'
 
@@ -18,6 +20,8 @@ export default function Home() {
 
 	const videoRef = React.useRef<HTMLVideoElement | null>(null)
 	const videoSrc = useVideoSourceStore(state => state.videoSrc)
+
+	const isMobile = useDeviceInfoStore(state => state.isMobile)
 
 	// TODO: Split the code refactor into files (optimize)
 	React.useEffect(() => {
@@ -66,7 +70,7 @@ export default function Home() {
 					muted
 					loop
 					playsInline
-					className='w-dvh h-dvh object-cover overflow-hidden opacity-20'
+					className={cn('object-cover overflow-hidden opacity-20', isMobile ? 'w-dvh h-dvh' : 'w-screen h-screen')}
 				>
 					<source src={videoSrc} type='video/webm' />
 				</video>

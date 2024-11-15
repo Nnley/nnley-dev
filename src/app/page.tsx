@@ -66,7 +66,7 @@ export default function Home() {
 					muted
 					loop
 					playsInline
-					className='w-screen h-screen object-cover overflow-hidden opacity-20'
+					className='w-dvh h-dvh object-cover overflow-hidden opacity-20'
 				>
 					<source src={videoSrc} type='video/webm' />
 				</video>

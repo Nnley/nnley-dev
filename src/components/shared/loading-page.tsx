@@ -85,7 +85,7 @@ export const LoadingPage: React.FC<Props> = ({ setIsLoadingPage }) => {
 	}, [videoSrc, videoRef.current])
 
 	return (
-		<main className='relative flex items-center justify-center w-screen h-screen overflow-hidden'>
+		<main className='relative flex items-center justify-center w-dvh h-dvh overflow-hidden'>
 			<Meteors number={30} />
 			<div className='flex flex-col items-center'>
 				{!isLoadingVideo && isLoadedPageTimeout() && isVideoContentLoaded ? (
